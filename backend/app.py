@@ -9,7 +9,7 @@ from routes.auth import auth_bp
 from routes.challenges import challenges_bp
 from routes.scoreboard import scoreboard_bp
 from routes.submissions import submissions_bp
-from backend.seed_event import seed_challenges
+from seed_event import seed_event_challenges
 
 BASE_DIR = Path(__file__).resolve().parent
 FRONTEND_DIST = BASE_DIR.parent / "frontend" / "dist"
@@ -35,7 +35,7 @@ def create_app():
 
     with app.app_context():
         db.create_all()
-        seed_challenges()
+        seed_event_challenges()
 
     @app.route("/", defaults={"path": ""})
     @app.route("/<path:path>")

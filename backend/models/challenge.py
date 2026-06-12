@@ -13,12 +13,21 @@ class Challenge(db.Model):
     description = db.Column(db.Text, nullable=False)
     points = db.Column(db.Integer, nullable=False, default=0)
     flag = db.Column(db.String(255), unique=True, nullable=False, index=True)
+
+    difficulty = db.Column(db.String(40), nullable=True)
+    hint = db.Column(db.Text, nullable=True)
+    order_index = db.Column(db.Integer, nullable=True, default=0)
+
     is_active = db.Column(db.Boolean, nullable=False, default=True)
-    created_at = db.Column(db.DateTime, nullable=False, default=lambda: datetime.now(timezone.utc))
+    created_at = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=lambda: datetime.now(timezone.utc),
+    )
 
     submissions = db.relationship("Submission", back_populates="challenge", lazy=True)
 
-    def to_public_dict(self):
+    def to_public_dict(self, solved=False):
         return {
             "id": self.id,
             "slug": self.slug,
@@ -26,5 +35,9 @@ class Challenge(db.Model):
             "category": self.category,
             "description": self.description,
             "points": self.points,
+            "difficulty": self.difficulty or "Standard",
+            "hint": self.hint,
+            "order_index": self.order_index or 0,
             "is_active": self.is_active,
+            "solved": solved,
         }
