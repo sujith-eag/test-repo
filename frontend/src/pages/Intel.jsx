@@ -3,11 +3,9 @@ export default function Intel() {
     <section>
       <div className="page-heading">
         <div className="eyebrow">Mission Briefing</div>
-        <h1>Shadow Protocol Intel</h1>
+        <h1>Hawkins Shadow Protocol Intel</h1>
         <p>
-          A rogue signal has surfaced across forgotten endpoints, exposed browser traces,
-          encoded transmissions, and weak vault controls. Your objective is to recover
-          protocol fragments and submit each confirmed flag.
+          A rogue signal has surfaced around Hawkins Lab-style systems: forgotten endpoints, exposed browser traces, encoded transmissions, and weak vault controls. Your objective is to recover protocol fragments and submit each confirmed flag. The theme is inspired by strange signals and gates, but all solves rely on cyber clues.
         </p>
       </div>
 
@@ -18,7 +16,7 @@ export default function Intel() {
         </div>
         <div className="panel mission-panel">
           <h3>Allowed Scope</h3>
-          <p>Use the application pages and routes under <code>/vuln/*</code>. Do not attack infrastructure.</p>
+          <p>Use the application pages, <code>/robots.txt</code>, <code>/humans.txt</code>, and routes under <code>/vuln/*</code>. Do not attack infrastructure.</p>
         </div>
         <div className="panel mission-panel">
           <h3>Operator Notes</h3>

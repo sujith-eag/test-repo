@@ -15,7 +15,7 @@ import NotFound from './pages/NotFound.jsx'
 
 export default function App() {
   return (
-    <div className="app-shell" data-shadow-fragment="CTF{app_shell_marker}">
+    <div className="app-shell" data-shadow-fragment="CTF{upside_down_shell_marker}">
       <Navbar />
       <main className="main-content">
         <Routes>

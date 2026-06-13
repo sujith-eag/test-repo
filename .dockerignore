@@ -17,3 +17,4 @@ backend/instance
 backend/*.db
 backend/*.sqlite
 backend/*.sqlite3
+guide.txt

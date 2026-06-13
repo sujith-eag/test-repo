@@ -31,10 +31,10 @@ export default function Submit() {
 
   return (
     <section className="auth-page">
-      <form className="panel form wide" onSubmit={handleSubmit} data-shadow-submit="CTF{submit_panel_trace}">
+      <form className="panel form wide" onSubmit={handleSubmit} data-shadow-submit="CTF{gate_submit_fragment}">
         <div className="eyebrow">Flag Transmission</div>
-        <h1>Submit Fragment</h1>
-        <p>Transmit a recovered Shadow Protocol flag to the scoring engine.</p>
+        <h1>Submit Signal Fragment</h1>
+        <p>Transmit a recovered Hawkins Shadow Protocol flag to the scoring engine.</p>
         <label>Recovered flag</label>
         <input placeholder="CTF{...}" value={flag} onChange={e => setFlag(e.target.value)} required />
         <button className="btn btn-primary" disabled={loading}>{loading ? 'Transmitting...' : 'Submit Flag'}</button>

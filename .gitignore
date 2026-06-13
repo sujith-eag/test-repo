@@ -13,3 +13,5 @@ frontend/.vite/
 
 backend/instance/
 ALL_FLAGS.txt
+env
+guide.txt

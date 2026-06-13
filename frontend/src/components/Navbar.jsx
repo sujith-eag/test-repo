@@ -5,12 +5,12 @@ export default function Navbar() {
   const { user, logout } = useAuth()
 
   return (
-    <header className="navbar" data-shadow-nav="CTF{navbar_trace}">
+    <header className="navbar" data-shadow-nav="CTF{walkie_nav_trace}">
       <Link to="/" className="brand">
         <span className="brand-mark" aria-hidden="true">
           <img src="/assets/favicon.jpg" alt="" className="brand-logo" />
         </span>
-        <span>Shadow Protocol</span>
+        <span>Hawkins Shadow Protocol</span>
       </Link>
 
       <nav className="nav-links">
