@@ -11,6 +11,7 @@ import Scoreboard from './pages/Scoreboard.jsx'
 import Submissions from './pages/Submissions.jsx'
 import Intel from './pages/Intel.jsx'
 import Rules from './pages/Rules.jsx'
+import Learn from './pages/Learn.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/intel" element={<Intel />} />
           <Route path="/rules" element={<Rules />} />
+          <Route path="/learn" element={<Learn />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/challenges" element={<Challenges />} />

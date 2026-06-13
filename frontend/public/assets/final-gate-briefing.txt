@@ -1,0 +1,14 @@
+Final Gate Briefing
+===================
+
+The final gate does not open with a single flag. It requires four recovered
+values from separate training labs:
+
+- channel number
+- archive keyword
+- badge role
+- gate phrase
+
+Submit them to /vuln/final-gate as query parameters or as a JSON POST body.
+Example shape only:
+/vuln/final-gate?channel=VALUE&keyword=VALUE&role=VALUE&phrase=VALUE

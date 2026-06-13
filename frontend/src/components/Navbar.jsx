@@ -16,6 +16,7 @@ export default function Navbar() {
       <nav className="nav-links">
         <NavLink to="/intel">Intel</NavLink>
         <NavLink to="/rules">Rules</NavLink>
+        <NavLink to="/learn">Learn</NavLink>
         <NavLink to="/challenges">Challenges</NavLink>
         <NavLink to="/submit">Submit</NavLink>
         <NavLink to="/scoreboard">Scoreboard</NavLink>

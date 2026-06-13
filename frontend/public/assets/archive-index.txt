@@ -1,0 +1,11 @@
+Hawkins Archive Index
+=====================
+
+Public records available through the archive terminal:
+- welcome.txt
+- radio-log.txt
+- incident-report.txt
+
+Operator note:
+The index only lists public records. Restricted notes may be filed outside the
+public folder naming pattern.

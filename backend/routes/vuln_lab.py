@@ -1,4 +1,5 @@
 import base64
+import json
 import os
 import sqlite3
 
@@ -202,3 +203,234 @@ def debug_lab():
         "lab_status": "normal",
         "message": "Diagnostics are quiet.",
     })
+
+@vuln_lab_bp.route("/vuln/lab-record")
+def lab_record_drift():
+    record_id = request.args.get("id", "1")
+    records = {
+        "1": {
+            "record_id": 1,
+            "owner": "field-team",
+            "classification": "public",
+            "summary": "Radio interference logged near the tree line.",
+        },
+        "2": {
+            "record_id": 2,
+            "owner": "maintenance",
+            "classification": "public",
+            "summary": "Power fluctuations observed in the west corridor.",
+        },
+        "3": {
+            "record_id": 3,
+            "owner": "archive-desk",
+            "classification": "public",
+            "summary": "Paper badge audit scheduled after midnight.",
+        },
+        "11": {
+            "record_id": 11,
+            "owner": "restricted-lab",
+            "classification": "restricted",
+            "summary": "Gate phrase recovered from unauthorized record access.",
+            "gate_phrase": "close-the-gate",
+            "flag": flag("FLAG_LAB_RECORD_DRIFT", "CTF{records_should_check_owners}"),
+        },
+    }
+
+    return jsonify({
+        "requested_id": record_id,
+        "record": records.get(record_id, {
+            "error": "record not found",
+            "available_public_examples": [1, 2, 3],
+        }),
+        "training_note": "This isolated lab demonstrates object-level authorization drift.",
+    })
+
+
+@vuln_lab_bp.route("/vuln/archive")
+def archive_slip():
+    requested_file = request.args.get("file", "welcome.txt")
+    archive_files = {
+        "welcome.txt": "Hawkins Archive: public terminal online. Try reading named records from the index.",
+        "radio-log.txt": "Radio Log: channel checks moved to the control room.",
+        "incident-report.txt": "Incident Report: a restricted gate note was filed outside the public folder.",
+        "../restricted/gate-note.txt": (
+            "Restricted Gate Note\n"
+            "archive_keyword=mirkwood\n"
+            f"flag={flag('FLAG_ARCHIVE_SLIP', 'CTF{archives_should_not_trust_paths}')}"
+        ),
+    }
+
+    return Response(
+        archive_files.get(
+            requested_file,
+            "Archive miss. Public files: welcome.txt, radio-log.txt, incident-report.txt",
+        ),
+        mimetype="text/plain",
+    )
+
+
+def encode_badge_payload(payload):
+    raw = json.dumps(payload, separators=(",", ":")).encode()
+    return base64.urlsafe_b64encode(raw).decode().rstrip("=")
+
+
+def decode_badge_payload(token):
+    padded = token + "=" * (-len(token) % 4)
+    decoded = base64.urlsafe_b64decode(padded.encode()).decode()
+    return json.loads(decoded)
+
+
+@vuln_lab_bp.route("/vuln/badge")
+def paper_badge():
+    starter_payload = {"name": "rookie", "role": "guest", "zone": "public"}
+    token = request.args.get("token", "")
+
+    if not token:
+        return jsonify({
+            "message": "Badge scanner online. The sample badge is encoded, not encrypted.",
+            "sample_payload": starter_payload,
+            "sample_token": encode_badge_payload(starter_payload),
+            "hint": "Decode the token, inspect the JSON fields, then re-encode a stronger badge.",
+        })
+
+    try:
+        badge = decode_badge_payload(token)
+    except Exception:
+        return jsonify({
+            "error": "badge token could not be decoded as url-safe base64 JSON",
+        }), 400
+
+    role = str(badge.get("role", "")).lower()
+    zone = str(badge.get("zone", "")).lower()
+    if role == "chief" and zone in {"restricted", "gate"}:
+        return jsonify({
+            "status": "accepted",
+            "badge": badge,
+            "final_gate_role": "chief",
+            "flag": flag("FLAG_PAPER_BADGE", "CTF{encoded_badges_are_not_auth}"),
+        })
+
+    return jsonify({
+        "status": "denied",
+        "badge": badge,
+        "message": "Guest paper badges cannot enter the restricted wing.",
+    }), 403
+
+
+@vuln_lab_bp.route("/vuln/control", methods=["GET", "POST", "PUT"])
+def control_room_method():
+    if request.method == "GET":
+        return jsonify({
+            "method": "GET",
+            "status": "read-only",
+            "message": "Control room is online, but observation alone will not move the gate.",
+        })
+
+    if request.method == "POST":
+        return jsonify({
+            "method": "POST",
+            "status": "operator-checkpoint",
+            "message": "A stronger maintenance method is required for the sealed control.",
+            "channel_clue": "The final gate channel is a single digit seen after full method control.",
+        })
+
+    return jsonify({
+        "method": "PUT",
+        "status": "control-updated",
+        "final_gate_channel": "7",
+        "flag": flag("FLAG_CONTROL_ROOM_METHOD", "CTF{methods_change_the_message}"),
+    })
+
+
+@vuln_lab_bp.route("/vuln/api/clearance", methods=["GET", "POST"])
+def clearance_override():
+    if request.method == "GET":
+        return jsonify({
+            "message": "POST a JSON clearance request to the training API.",
+            "example": {"name": "operator", "clearance": "visitor", "sector": "public"},
+            "hint": "APIs sometimes read fields the interface never shows.",
+        })
+
+    payload = request.get_json(silent=True) or {}
+    clearance = str(payload.get("clearance", "")).lower()
+    sector = str(payload.get("sector", "")).lower()
+    override = payload.get("override") is True
+
+    if clearance in {"admin", "director"} and sector == "restricted" and override:
+        return jsonify({
+            "status": "override accepted",
+            "gate_phrase": "close-the-gate",
+            "flag": flag("FLAG_CLEARANCE_OVERRIDE", "CTF{hidden_fields_open_doors}"),
+        })
+
+    return jsonify({
+        "status": "denied",
+        "received": payload,
+        "message": "Clearance request lacks restricted override authority.",
+    }), 403
+
+
+def caesar_shift(text, amount):
+    shifted = []
+    for char in text:
+        if "a" <= char <= "z":
+            shifted.append(chr((ord(char) - ord("a") + amount) % 26 + ord("a")))
+        elif "A" <= char <= "Z":
+            shifted.append(chr((ord(char) - ord("A") + amount) % 26 + ord("A")))
+        else:
+            shifted.append(char)
+    return "".join(shifted)
+
+
+@vuln_lab_bp.route("/vuln/shifted-broadcast")
+def shifted_broadcast():
+    plain = (
+        "Rotation note: channel seven matters for the final gate. "
+        f"Flag: {flag('FLAG_SHIFTED_BROADCAST', 'CTF{rotation_reveals_the_broadcast}')}"
+    )
+    return jsonify({
+        "classification": "shifted-broadcast",
+        "cipher": "caesar",
+        "shift": 13,
+        "payload": caesar_shift(plain, 13),
+        "hint": "A common rotation can make this readable again.",
+    })
+
+
+@vuln_lab_bp.route("/vuln/final-gate", methods=["GET", "POST"])
+def final_gate():
+    payload = request.get_json(silent=True) if request.method == "POST" else None
+    source = payload or request.values
+
+    submitted = {
+        "channel": str(source.get("channel", "")).strip().lower(),
+        "keyword": str(source.get("keyword", "")).strip().lower(),
+        "role": str(source.get("role", "")).strip().lower(),
+        "phrase": str(source.get("phrase", "")).strip().lower(),
+    }
+    expected = {
+        "channel": "7",
+        "keyword": "mirkwood",
+        "role": "chief",
+        "phrase": "close-the-gate",
+    }
+
+    missing = [key for key, value in submitted.items() if not value]
+    incorrect = [key for key, value in submitted.items() if value and value != expected[key]]
+
+    if submitted == expected:
+        return jsonify({
+            "status": "gate sealed",
+            "message": "All four keys aligned. The Shadow Protocol is contained.",
+            "flag": flag("FLAG_FINAL_GATE", "CTF{four_keys_close_the_shadow_gate}"),
+        })
+
+    return jsonify({
+        "status": "gate unstable",
+        "received": submitted,
+        "missing_fields": missing,
+        "incorrect_fields": incorrect,
+        "needs": ["channel", "keyword", "role", "phrase"],
+        "hint": "The final lock combines clues from records, archive notes, badge data, and control signals.",
+    }), 400
+

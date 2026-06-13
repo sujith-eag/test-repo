@@ -1,0 +1,10 @@
+Hawkins Signal Capture 08
+=========================
+
+The receiver captured a wrapped payload. Operators noted that the first layer
+looked like a common radio-safe encoding. After that, the remaining signal was
+stored as byte pairs.
+
+payload=NDM1NDQ2N2I3MzY5Njc2ZTYxNmM1ZjczNzQ2MTYzNmI1Zjc1NmU3NzcyNjE3MDcwNjU2NDdk
+
+workflow=base64 -> hex bytes -> ascii
