@@ -8,7 +8,7 @@ export default function Navbar() {
     <header className="navbar" data-shadow-nav="CTF{navbar_trace}">
       <Link to="/" className="brand">
         <span className="brand-mark" aria-hidden="true">
-          <img src="/assets/favicon.jpeg" alt="" className="brand-logo" />
+          <img src="/assets/favicon.jpg" alt="" className="brand-logo" />
         </span>
         <span>Shadow Protocol</span>
       </Link>
