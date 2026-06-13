@@ -9,8 +9,10 @@ export default function Rules() {
 
       <div className="panel rules-list">
         <ul>
+          <li>Only interact with this event site and challenge-related surfaces exposed by it.</li>
+          <li>Do not attack Render, hosting infrastructure, databases directly, accounts, or unrelated services.</li>
+          <li>Standard browser inspection, source review, headers, storage, encoding, and endpoint testing are allowed.</li>
           <li>Only attack or test the provided challenge routes, pages, and authorized lab endpoints.</li>
-          <li>Do not attack Render, hosting infrastructure, databases, or authentication systems.</li>
           <li>No brute forcing user accounts, login routes, or other participants.</li>
           <li>Do not share flags with other operators or teams.</li>
           <li>Duplicate correct submissions do not award extra points.</li>

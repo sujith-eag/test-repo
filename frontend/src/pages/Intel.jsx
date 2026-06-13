@@ -16,7 +16,7 @@ export default function Intel() {
         </div>
         <div className="panel mission-panel">
           <h3>Allowed Scope</h3>
-          <p>Use the application pages, <code>/robots.txt</code>, <code>/humans.txt</code>, and routes under <code>/vuln/*</code>. Do not attack infrastructure.</p>
+          <p>Use only this event site and the challenge surfaces it exposes. Standard web recon is allowed, but hosting infrastructure, accounts, and unrelated services are out of scope.</p>
         </div>
         <div className="panel mission-panel">
           <h3>Operator Notes</h3>
