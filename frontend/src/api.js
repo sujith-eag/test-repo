@@ -1,5 +1,5 @@
 const TOKEN_KEY = 'shadow_protocol_token'
-const CLIENT_WHISPER = 'CTF{api_client_whisper}'
+const CLIENT_WHISPER = 'CTF{client_whispers_in_headers}'
 
 export function getToken() {
   return localStorage.getItem(TOKEN_KEY)

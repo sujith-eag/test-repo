@@ -7,12 +7,12 @@ from models.challenge import Challenge
 
 
 FRONTEND_FLAGS = {
-    "FLAG_META_TAG_FRAGMENT": "CTF{hawkins_meta_beacon}",
-    "FLAG_APP_SHELL_MARKER": "CTF{upside_down_shell_marker}",
-    "FLAG_HOME_INVISIBLE_FRAGMENT": "CTF{phantom_hawkins_signal}",
-    "FLAG_CSS_CLASS_FRAGMENT": "CTF{hellfire_css_trace}",
-    "FLAG_NAVBAR_TRACE": "CTF{walkie_nav_trace}",
-    "FLAG_SUBMIT_PANEL_TRACE": "CTF{gate_submit_fragment}",
+    "FLAG_META_TAG_FRAGMENT": "CTF{mirkwood_beacon_1983}",
+    "FLAG_APP_SHELL_MARKER": "CTF{the_gate_left_a_mark}",
+    "FLAG_HOME_INVISIBLE_FRAGMENT": "CTF{lights_spell_the_warning}",
+    "FLAG_CSS_CLASS_FRAGMENT": "CTF{hellfire_hides_in_style}",
+    "FLAG_NAVBAR_TRACE": "CTF{channel_six_is_listening}",
+    "FLAG_SUBMIT_PANEL_TRACE": "CTF{red_door_accepts_the_signal}",
 }
 
 EVENT_CHALLENGES = [
@@ -98,7 +98,7 @@ EVENT_CHALLENGES = [
         "points": 50,
         "order_index": 20,
         "env_key": "FLAG_CONSOLE_WHISPER",
-        "fallback": "CTF{static_console_whisper}",
+        "fallback": "CTF{static_speaks_first}",
     },
     {
         "slug": "hidden-attribute",
@@ -110,7 +110,7 @@ EVENT_CHALLENGES = [
         "points": 50,
         "order_index": 30,
         "env_key": "FLAG_HIDDEN_ATTRIBUTE",
-        "fallback": "CTF{hawkins_lab_attribute}",
+        "fallback": "CTF{lab_tags_never_lie}",
     },
     {
         "slug": "local-storage-leak",
@@ -122,7 +122,7 @@ EVENT_CHALLENGES = [
         "points": 75,
         "order_index": 40,
         "env_key": "FLAG_LOCAL_STORAGE_LEAK",
-        "fallback": "CTF{browser_memory_trace}",
+        "fallback": "CTF{memory_survives_the_breach}",
     },
     {
         "slug": "ghosts-in-robots",
@@ -134,7 +134,7 @@ EVENT_CHALLENGES = [
         "points": 75,
         "order_index": 50,
         "env_key": "FLAG_ROBOTS_GHOST",
-        "fallback": "CTF{crawler_ignored_gate}",
+        "fallback": "CTF{crawlers_avoid_the_gate}",
     },
     {
         "slug": "forgotten-humans",
@@ -146,7 +146,7 @@ EVENT_CHALLENGES = [
         "points": 75,
         "order_index": 60,
         "env_key": "FLAG_FORGOTTEN_HUMANS",
-        "fallback": "CTF{human_lab_note}",
+        "fallback": "CTF{humans_left_the_note}",
     },
     {
         "slug": "echoes-in-the-header",
@@ -158,7 +158,7 @@ EVENT_CHALLENGES = [
         "points": 100,
         "order_index": 70,
         "env_key": "FLAG_HEADER_ECHO",
-        "fallback": "CTF{upside_down_header_echo}",
+        "fallback": "CTF{headers_echo_from_below}",
     },
     {
         "slug": "encoded-transmission",
@@ -170,7 +170,7 @@ EVENT_CHALLENGES = [
         "points": 100,
         "order_index": 80,
         "env_key": "FLAG_ENCODED_TRANSMISSION",
-        "fallback": "CTF{encoded_walkie_transmission}",
+        "fallback": "CTF{walkie_payload_decoded}",
     },
     {
         "slug": "reversed-signal",
@@ -182,7 +182,7 @@ EVENT_CHALLENGES = [
         "points": 100,
         "order_index": 90,
         "env_key": "FLAG_REVERSED_SIGNAL",
-        "fallback": "CTF{reversed_vecna_signal}",
+        "fallback": "CTF{vecna_signal_reversed}",
     },
     {
         "slug": "shadow-search",
@@ -194,7 +194,7 @@ EVENT_CHALLENGES = [
         "points": 125,
         "order_index": 100,
         "env_key": "FLAG_SHADOW_SEARCH",
-        "fallback": "CTF{hawkins_archive_index}",
+        "fallback": "CTF{archive_knows_the_word}",
     },
     {
         "slug": "vault-injection",
@@ -206,7 +206,7 @@ EVENT_CHALLENGES = [
         "points": 150,
         "order_index": 110,
         "env_key": "FLAG_VAULT_INJECTION",
-        "fallback": "CTF{lab_vault_breach}",
+        "fallback": "CTF{vault_trusts_the_wrong_input}",
     },
 
     {
@@ -219,7 +219,7 @@ EVENT_CHALLENGES = [
         "points": 50,
         "order_index": 120,
         "env_key": "FLAG_MAIN_RENDER_SIGNAL",
-        "fallback": "CTF{main_render_gate}",
+        "fallback": "CTF{render_opened_the_gate}",
     },
     {
         "slug": "footer-static-trace",
@@ -231,7 +231,7 @@ EVENT_CHALLENGES = [
         "points": 50,
         "order_index": 130,
         "env_key": "FLAG_FOOTER_STATIC_TRACE",
-        "fallback": "CTF{footer_static_trace}",
+        "fallback": "CTF{static_at_the_footer}",
     },
     {
         "slug": "red-room-intel-note",
@@ -243,7 +243,7 @@ EVENT_CHALLENGES = [
         "points": 50,
         "order_index": 140,
         "env_key": "FLAG_RED_ROOM_INTEL_NOTE",
-        "fallback": "CTF{red_room_intel_note}",
+        "fallback": "CTF{red_room_note_found}",
     },
     {
         "slug": "rules-gate-marker",
@@ -255,7 +255,7 @@ EVENT_CHALLENGES = [
         "points": 50,
         "order_index": 150,
         "env_key": "FLAG_RULES_GATE_MARKER",
-        "fallback": "CTF{rules_gate_marker}",
+        "fallback": "CTF{rules_mark_the_boundary}",
     },
     {
         "slug": "api-client-whisper",
@@ -267,7 +267,7 @@ EVENT_CHALLENGES = [
         "points": 75,
         "order_index": 160,
         "env_key": "FLAG_API_CLIENT_WHISPER",
-        "fallback": "CTF{api_client_whisper}",
+        "fallback": "CTF{client_whispers_in_headers}",
     },
     {
         "slug": "radio-log-file",
@@ -279,7 +279,7 @@ EVENT_CHALLENGES = [
         "points": 75,
         "order_index": 170,
         "env_key": "FLAG_RADIO_LOG_FILE",
-        "fallback": "CTF{radio_log_fragment}",
+        "fallback": "CTF{radio_log_after_midnight}",
     },
     {
         "slug": "classified-hawkins-json",
@@ -291,7 +291,7 @@ EVENT_CHALLENGES = [
         "points": 75,
         "order_index": 180,
         "env_key": "FLAG_CLASSIFIED_HAWKINS_JSON",
-        "fallback": "CTF{classified_hawkins_json}",
+        "fallback": "CTF{json_file_from_hawkins}",
     },
     {
         "slug": "hawkins-cookie-signal",
@@ -303,7 +303,7 @@ EVENT_CHALLENGES = [
         "points": 75,
         "order_index": 190,
         "env_key": "FLAG_HAWKINS_COOKIE_SIGNAL",
-        "fallback": "CTF{hawkins_cookie_signal}",
+        "fallback": "CTF{cookie_from_the_lab}",
     },
     {
         "slug": "channel-eleven-frequency",
@@ -315,7 +315,7 @@ EVENT_CHALLENGES = [
         "points": 100,
         "order_index": 200,
         "env_key": "FLAG_CHANNEL_ELEVEN_FREQUENCY",
-        "fallback": "CTF{channel_eleven_frequency}",
+        "fallback": "CTF{eleven_found_the_frequency}",
     },
     {
         "slug": "debug-lab-leak",
@@ -327,7 +327,7 @@ EVENT_CHALLENGES = [
         "points": 100,
         "order_index": 210,
         "env_key": "FLAG_DEBUG_LAB_LEAK",
-        "fallback": "CTF{debug_lab_leak}",
+        "fallback": "CTF{debug_mode_broke_containment}",
     },
 ]
 

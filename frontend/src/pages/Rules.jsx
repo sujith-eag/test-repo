@@ -1,6 +1,6 @@
 export default function Rules() {
   return (
-    <section data-rules-gate="CTF{rules_gate_marker}">
+    <section data-rules-gate="CTF{rules_mark_the_boundary}">
       <div className="page-heading">
         <div className="eyebrow">Rules of Engagement</div>
         <h1>Event Rules</h1>

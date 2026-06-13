@@ -6,7 +6,7 @@ export default function Home() {
 
   return (
     <section className="hero">
-      <span className="invisible-fragment">{"CTF{phantom_hawkins_signal}"}</span>
+      <span className="invisible-fragment">{"CTF{lights_spell_the_warning}"}</span>
       <div className="eyebrow">Live CTF Operation</div>
       <h1>Enter the Hawkins Shadow Protocol</h1>
       <p>

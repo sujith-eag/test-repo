@@ -146,8 +146,8 @@ td { color: var(--text); }
   user-select: none;
 }
 
-.ctf-css-fragment-CTF-hellfire_css_trace {
-  --shadow-note: "CTF{hellfire_css_trace}";
+.ctf-css-fragment-hellfire-style-residue {
+  --shadow-note: "CTF{hellfire_hides_in_style}";
 }
 
 @media (max-width: 820px) {

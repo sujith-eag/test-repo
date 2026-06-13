@@ -31,7 +31,7 @@ export default function Submit() {
 
   return (
     <section className="auth-page">
-      <form className="panel form wide" onSubmit={handleSubmit} data-shadow-submit="CTF{gate_submit_fragment}">
+      <form className="panel form wide" onSubmit={handleSubmit} data-shadow-submit="CTF{red_door_accepts_the_signal}">
         <div className="eyebrow">Flag Transmission</div>
         <h1>Submit Signal Fragment</h1>
         <p>Transmit a recovered Hawkins Shadow Protocol flag to the scoring engine.</p>

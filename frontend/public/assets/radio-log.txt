@@ -5,4 +5,4 @@ HAWKINS RADIO LOG
 23:44 - Channel sweep began.
 23:47 - Fragment recovered from public asset storage.
 
-Recovered fragment: CTF{radio_log_fragment}
+Recovered fragment: CTF{radio_log_after_midnight}

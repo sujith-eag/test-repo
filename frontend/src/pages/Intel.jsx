@@ -1,6 +1,6 @@
 export default function Intel() {
   return (
-    <section data-red-room-note="CTF{red_room_intel_note}">
+    <section data-red-room-note="CTF{red_room_note_found}">
       <div className="page-heading">
         <div className="eyebrow">Mission Briefing</div>
         <h1>Hawkins Shadow Protocol Intel</h1>

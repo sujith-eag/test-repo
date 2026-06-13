@@ -19,7 +19,7 @@ const coordinators = [
 
 export default function Footer() {
   return (
-    <footer className="footer" data-footer-static="CTF{footer_static_trace}">
+    <footer className="footer" data-footer-static="CTF{static_at_the_footer}">
       <p>Shadow Protocol · CTF Event Operations</p>
       <p>Investigate only the provided challenge scope and authorized lab routes.</p>
 

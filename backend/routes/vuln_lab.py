@@ -14,9 +14,9 @@ def flag(name, fallback):
 
 @vuln_lab_bp.route("/vuln/client-lab")
 def client_lab():
-    console_flag = flag("FLAG_CONSOLE_WHISPER", "CTF{static_console_whisper}")
-    attr_flag = flag("FLAG_HIDDEN_ATTRIBUTE", "CTF{hawkins_lab_attribute}")
-    storage_flag = flag("FLAG_LOCAL_STORAGE_LEAK", "CTF{browser_memory_trace}")
+    console_flag = flag("FLAG_CONSOLE_WHISPER", "CTF{static_speaks_first}")
+    attr_flag = flag("FLAG_HIDDEN_ATTRIBUTE", "CTF{lab_tags_never_lie}")
+    storage_flag = flag("FLAG_LOCAL_STORAGE_LEAK", "CTF{memory_survives_the_breach}")
     html = f"""
     <!doctype html>
     <html>
@@ -44,7 +44,7 @@ def robots_txt():
 Disallow: /vuln/ghost-signal
 Disallow: /vuln/vault-search
 
-# Gate signal recovered: {flag('FLAG_ROBOTS_GHOST', 'CTF{crawler_ignored_gate}')}
+# Gate signal recovered: {flag('FLAG_ROBOTS_GHOST', 'CTF{crawlers_avoid_the_gate}')}
 """
     return Response(content, mimetype="text/plain")
 
@@ -57,7 +57,7 @@ def humans_txt():
 - Signal Archivist
 - Lab Systems Watcher
 
-Human-readable lab note: {flag('FLAG_FORGOTTEN_HUMANS', 'CTF{human_lab_note}')}
+Human-readable lab note: {flag('FLAG_FORGOTTEN_HUMANS', 'CTF{humans_left_the_note}')}
 """
     return Response(content, mimetype="text/plain")
 
@@ -65,13 +65,13 @@ Human-readable lab note: {flag('FLAG_FORGOTTEN_HUMANS', 'CTF{human_lab_note}')}
 @vuln_lab_bp.route("/vuln/header")
 def header_echo():
     response = jsonify({"message": "The body is quiet. The signal is above it."})
-    response.headers["X-Shadow-Flag"] = flag("FLAG_HEADER_ECHO", "CTF{upside_down_header_echo}")
+    response.headers["X-Shadow-Flag"] = flag("FLAG_HEADER_ECHO", "CTF{headers_echo_from_below}")
     return response
 
 
 @vuln_lab_bp.route("/vuln/transmission")
 def encoded_transmission():
-    encoded = base64.b64encode(flag("FLAG_ENCODED_TRANSMISSION", "CTF{encoded_walkie_transmission}").encode()).decode()
+    encoded = base64.b64encode(flag("FLAG_ENCODED_TRANSMISSION", "CTF{walkie_payload_decoded}").encode()).decode()
     return jsonify({
         "classification": "encoded-walkie-transmission",
         "encoding": "base64",
@@ -83,7 +83,7 @@ def encoded_transmission():
 def reversed_signal():
     return jsonify({
         "classification": "reversed-red-signal",
-        "payload": flag("FLAG_REVERSED_SIGNAL", "CTF{reversed_vecna_signal}")[::-1],
+        "payload": flag("FLAG_REVERSED_SIGNAL", "CTF{vecna_signal_reversed}")[::-1],
     })
 
 
@@ -94,7 +94,7 @@ def shadow_search():
         "shadow": "Hawkins activity confirmed near the old relay.",
         "vault": "Vault records are indexed under restricted protocol terms.",
         "protocol": "Incident fragments detected. Try querying for the obvious target.",
-        "flag": flag("FLAG_SHADOW_SEARCH", "CTF{hawkins_archive_index}"),
+        "flag": flag("FLAG_SHADOW_SEARCH", "CTF{archive_knows_the_word}"),
     }
     matches = [value for key, value in records.items() if query and query in key]
     return jsonify({"query": query, "results": matches or ["No matching intel."]})
@@ -116,7 +116,7 @@ def build_vault_database():
     )
     cursor.execute(
         "INSERT INTO secret_flags VALUES (1, ?, 'vault-injection')",
-        (flag("FLAG_VAULT_INJECTION", "CTF{lab_vault_breach}"),),
+        (flag("FLAG_VAULT_INJECTION", "CTF{vault_trusts_the_wrong_input}"),),
     )
     connection.commit()
     return connection
@@ -163,7 +163,7 @@ def hawkins_cookie():
     })
     response.set_cookie(
         "hawkins_cookie_signal",
-        flag("FLAG_HAWKINS_COOKIE_SIGNAL", "CTF{hawkins_cookie_signal}"),
+        flag("FLAG_HAWKINS_COOKIE_SIGNAL", "CTF{cookie_from_the_lab}"),
         httponly=False,
         samesite="Lax",
     )
@@ -177,7 +177,7 @@ def frequency_channel():
         return jsonify({
             "channel": channel,
             "status": "locked-on",
-            "signal": flag("FLAG_CHANNEL_ELEVEN_FREQUENCY", "CTF{channel_eleven_frequency}"),
+            "signal": flag("FLAG_CHANNEL_ELEVEN_FREQUENCY", "CTF{eleven_found_the_frequency}"),
         })
 
     return jsonify({
@@ -194,7 +194,7 @@ def debug_lab():
         return jsonify({
             "debug": True,
             "lab_status": "diagnostic mode enabled",
-            "debug_fragment": flag("FLAG_DEBUG_LAB_LEAK", "CTF{debug_lab_leak}"),
+            "debug_fragment": flag("FLAG_DEBUG_LAB_LEAK", "CTF{debug_mode_broke_containment}"),
         })
 
     return jsonify({
