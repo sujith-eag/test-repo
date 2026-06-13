@@ -154,3 +154,51 @@ def vault_legacy_hint():
         "message": "Lab vault lookup moved to /vuln/vault-search?q=alpha",
         "hint": "Try a UNION-style payload when searching the isolated vault database.",
     })
+
+@vuln_lab_bp.route("/vuln/cookie")
+def hawkins_cookie():
+    response = jsonify({
+        "message": "A small lab token was stored by the response.",
+        "check": "Inspect response cookies or browser storage for the signal.",
+    })
+    response.set_cookie(
+        "hawkins_cookie_signal",
+        flag("FLAG_HAWKINS_COOKIE_SIGNAL", "CTF{hawkins_cookie_signal}"),
+        httponly=False,
+        samesite="Lax",
+    )
+    return response
+
+
+@vuln_lab_bp.route("/vuln/frequency")
+def frequency_channel():
+    channel = request.args.get("channel", "")
+    if channel == "11":
+        return jsonify({
+            "channel": channel,
+            "status": "locked-on",
+            "signal": flag("FLAG_CHANNEL_ELEVEN_FREQUENCY", "CTF{channel_eleven_frequency}"),
+        })
+
+    return jsonify({
+        "channel": channel or "unset",
+        "status": "static",
+        "message": "No stable signal on this channel.",
+    })
+
+
+@vuln_lab_bp.route("/vuln/debug")
+def debug_lab():
+    mode = request.args.get("mode", "").lower()
+    if mode == "true":
+        return jsonify({
+            "debug": True,
+            "lab_status": "diagnostic mode enabled",
+            "debug_fragment": flag("FLAG_DEBUG_LAB_LEAK", "CTF{debug_lab_leak}"),
+        })
+
+    return jsonify({
+        "debug": False,
+        "lab_status": "normal",
+        "message": "Diagnostics are quiet.",
+    })

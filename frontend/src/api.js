@@ -1,4 +1,5 @@
 const TOKEN_KEY = 'shadow_protocol_token'
+const CLIENT_WHISPER = 'CTF{api_client_whisper}'
 
 export function getToken() {
   return localStorage.getItem(TOKEN_KEY)
@@ -16,7 +17,8 @@ export async function apiRequest(path, options = {}) {
   const token = getToken()
   const headers = {
     'Content-Type': 'application/json',
-    ...(options.headers || {})
+    ...(options.headers || {}),
+    'X-Hawkins-Client': CLIENT_WHISPER
   }
 
   if (token) {

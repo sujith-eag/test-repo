@@ -1,0 +1,7 @@
+{
+  "classification": "hawkins-lab-public-asset",
+  "status": "misfiled",
+  "incident": "structured note exposed in public assets",
+  "fragment": "CTF{classified_hawkins_json}",
+  "operator_note": "Public assets can carry readable machine data."
+}
