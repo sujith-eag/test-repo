@@ -1,84 +1,34 @@
-# Shadow Protocol - Phase 1
+# Hawkins Shadow Protocol CTF
 
-A deployment-ready CTF platform foundation with a React frontend, Flask API backend, JWT authentication, scoring, submissions, and Docker deployment for Render.
+A Stranger Things-inspired cyber CTF event site built as a single deployable Render application.
 
-## What Phase 1 includes
+## Overview
 
-- User registration and login
-- JWT-protected routes
-- Challenge listing
-- Flag submission
-- Duplicate score prevention
-- Scoreboard
-- Personal submission history
-- React app served by Flask in production
-- Docker-based single-service deployment
-- SQLite fallback for local development
-- PostgreSQL support for Render
-
-## What Phase 1 does not include yet
-
-- Final event flags
-- Intentional vulnerable labs
-- robots.txt / humans.txt challenge content
-- Header flag challenge
-- SQL injection challenge
-- Admin dashboard
-- Hint system
-
-## Environment variables
-
-Required for production:
-
-```bash
-JWT_SECRET_KEY=replace-with-a-long-random-secret
-```
-
-Recommended for production:
-
-```bash
-DATABASE_URL=postgresql://...
-```
-
-If `DATABASE_URL` is not set, the app uses local SQLite.
-
-## Local backend development
-
-```bash
-cd backend
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python app.py
-```
-
-Backend runs on:
+The site includes:
 
 ```text
-http://localhost:7000
+React frontend
+Flask backend
+JWT authentication
+Challenge board
+Flag submission
+Duplicate score protection
+Scoreboard
+Submission history
+Themed vulnerable lab routes
+Frontend, recon, crypto, and web exploitation challenges
+Docker deployment
 ```
 
-## Local frontend development
+The theme uses Hawkins / gate / static / lab / walkie-inspired language, but the challenges are solvable through standard cyber techniques and do not require show knowledge.
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Frontend runs on:
-
-```text
-http://localhost:5173
-```
-
-The Vite proxy sends `/api` requests to the Flask backend.
-
-## Docker local run
+## Local Docker setup
 
 ```bash
 docker build -t shadow-protocol .
-docker run -p 10000:10000 -e JWT_SECRET_KEY=dev-secret shadow-protocol
+docker run --rm -p 10000:10000 \
+  -e JWT_SECRET_KEY="local-dev-shadow-protocol-secret-key-32chars-minimum" \
+  shadow-protocol
 ```
 
 Open:
@@ -89,35 +39,63 @@ http://localhost:10000
 
 ## Render deployment
 
-1. Push this repo to GitHub.
-2. Create a Render Web Service.
-3. Select Docker environment.
-4. Set `JWT_SECRET_KEY`.
-5. Attach Render PostgreSQL or use the included `render.yaml` blueprint.
+Create a Render Web Service using Docker.
 
-## Phase 1 demo flags
-
-These are test-only flags for verifying platform behavior:
+Required environment variable:
 
 ```text
-CTF{welcome_agent}
-CTF{first_transmission}
-CTF{echo_protocol}
+JWT_SECRET_KEY=<strong random secret>
 ```
 
-Replace them during Phase 2 with real event content and keep organizer materials private.
+Optional environment variables:
 
-## Test checklist
+```text
+EVENT_NAME=Hawkins Shadow Protocol
+REGISTRATION_ENABLED=true
+SUBMISSIONS_ENABLED=true
+SCOREBOARD_VISIBLE=true
+DATABASE_URL=<postgresql-url>
+```
 
-- Register works
-- Login works
-- `/api/auth/me` works with JWT
-- Challenge list loads
-- Wrong flag is rejected
-- Correct flag awards points
-- Duplicate correct flag does not award points again
-- Scoreboard updates
-- Submission history loads
-- React routes refresh correctly
-- Docker build succeeds
-- Render deploy succeeds
+SQLite is acceptable for short testing, but PostgreSQL is recommended for a real event.
+
+## Main routes
+
+```text
+/                      Frontend app
+/intel                 Mission briefing
+/rules                 Event rules
+/challenges            Challenge board
+/submit                Submit flags
+/scoreboard            Rankings
+/submissions           User submission history
+/api/health            Health check
+/api/challenges        Challenge API
+/api/submissions       Flag submission API
+/robots.txt            Recon file
+/humans.txt            Recon file
+/vuln/*                Intentional challenge lab routes
+```
+
+## Important safety rule
+
+Only `/vuln/*`, public assets, and normal application pages are intended challenge surfaces. The real auth/scoring platform should not be intentionally vulnerable.
+
+## Files of interest
+
+```text
+backend/seed_event.py              Challenge seed and fallback flags
+backend/routes/vuln_lab.py         Intentional lab routes
+frontend/src/styles.css            CSS/source flags and styling
+frontend/src/api.js                API client behavior
+frontend/src/pages/                Frontend pages
+frontend/public/assets/            Public recon assets
+```
+
+## Notes for organizers
+
+- Keep judge guides private if the repo is public.
+- Avoid flags that directly match challenge title/slug.
+- Test every flag before the event.
+- Avoid redeploying during the event if using SQLite.
+- For persistent scoring, use Render PostgreSQL.
